@@ -112,7 +112,7 @@ section.block + section.block { padding-top: 0; }
 .kphoto { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 4 / 5; box-shadow: 0 40px 80px -30px rgba(60,20,40,0.45); isolation: isolate;
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; will-change: transform; }
 .kphoto.live { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; box-shadow: 0 60px 100px -36px rgba(60,20,40,0.55); }
-.kphoto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; transform: scale(1.04) translate(var(--ix, 0px), var(--iy, 0px)); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.kphoto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; transform: scale(1.04) translate(var(--ix, 0px), var(--iy, 0px)); transition: transform .6s cubic-bezier(.2,.8,.2,1); }
 .kphoto.live img { transition: transform .45s cubic-bezier(.2,.8,.2,1); }
 .kphoto::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s ease; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.28), rgba(255,255,255,0) 60%); }
 .kphoto.live::after { opacity: 1; }
