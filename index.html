@@ -279,8 +279,8 @@
     background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.28), rgba(255,255,255,0) 60%); }
   .kphoto.live::after { opacity: 1; }
   .kphoto::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgba(23,20,26,0.35), rgba(23,20,26,0) 45%); }
-  .kfacts { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
-  .kfacts span { font-size: 13px; font-weight: 600; padding: 9px 14px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink-2); transition: color .25s ease, border-color .25s ease, transform .25s ease; }
+  .kfacts { margin-top: 26px; display: flex; gap: 8px; flex-wrap: nowrap; }
+  .kfacts span { font-size: 12.5px; font-weight: 600; padding: 8px 12px; white-space: nowrap; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink-2); transition: color .25s ease, border-color .25s ease, transform .25s ease; }
   .kfacts span:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
   .kphoto .ktag { position: absolute; z-index: 2; left: 18px; top: 18px; background: var(--mesh); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; padding: 10px 16px; border-radius: 999px; }
   .krole { margin-top: 14px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 600; color: var(--ink-2); }
@@ -335,7 +335,7 @@
   .fstage .strip .mqt { display: flex; width: max-content; animation: mq 40s linear infinite; font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; }
   .fstage .strip .mqt span { padding: 0 1.6em; }
   .fstage .strip .mqt i { font-style: normal; opacity: 0.6; }
-  .fstage .mid { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px, 4vw, 48px); flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .fstage .mid { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px, 4vw, 48px) 9vh; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
   .fstage .h2 { font-size: clamp(48px, 9vw, 140px); }
   .fstage .lead { color: rgba(255,255,255,0.92); margin: 20px auto 0; text-align: center; }
   .fstage .btns { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -365,6 +365,7 @@
     .countdown .nums { justify-content: center; }
     .hero-date { text-align: center; }
     .about, .faq, .venue .inner, .keynote { grid-template-columns: 1fr; }
+    .kfacts { flex-wrap: wrap; }
     .kphoto { max-width: 440px; }
     footer .top { grid-template-columns: 1fr 1fr; }
     .ruler { display: none; }
@@ -405,7 +406,6 @@
     </a>
     <ul>
       <li class="hm"><a href="about.html">NextGen 2025</a></li>
-      <li class="hm"><a href="program.html">Program</a></li>
       <li class="hs"><a href="speakers.html">Speakers</a></li>
       <li><a class="pill cta" href="#tickets" data-tickets>Buy tickets <span class="arr">&rarr;</span></a></li>
     </ul>
@@ -432,7 +432,7 @@
     </div>
     <div class="hero-cta">
       <a class="pill cta" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen <span class="arr">&rarr;</span></a>
-      <a class="pill ghost" href="program.html">See the program</a>
+      <a class="pill ghost" href="speakers.html">Meet the speakers</a>
     </div>
     <div class="countdown" aria-label="Countdown to doors open">
       <div class="nums">
@@ -457,7 +457,7 @@
         <h2 class="h2">Evan <span class="it">Spiegel</span></h2>
         <div class="krole">Co-founder and CEO, Snap Inc.</div>
         <p class="lead" style="margin-top:22px">Evan Spiegel started Snapchat as a Stanford student in 2011 and has run the company ever since, taking Snap public in 2017 and building it into the company behind Snapchat and Spectacles. In 2015, at 24, he became the youngest billionaire in the world. He grew up in Los Angeles. He takes the Royce Hall stage on January 23.</p>
-        <div class="kfacts"><span>Founded Snapchat, 2011</span><span>Youngest billionaire in the world, 2015</span><span>Took Snap public, 2017</span><span>Los Angeles native</span></div>
+        <div class="kfacts"><span>Snapchat, 2011</span><span>Youngest billionaire, 2015</span><span>Snap IPO, 2017</span><span>LA native</span></div>
         <a class="more" href="speakers.html">All speakers <span class="arr">&rarr;</span></a>
       </div>
     </div>
@@ -481,7 +481,6 @@
         <div class="item"><span class="num">04</span><div><h3>Breakout Sessions</h3><p>Small-room panels and discussions where the audience talks back.</p></div></div>
       </div>
     </div></div>
-    <a class="more reveal" href="program.html">Full program <span class="arr">&rarr;</span></a>
   </div>
 </section>
 
@@ -561,18 +560,11 @@
 
     <div class="mid">
       <h2 class="h2 in">See you in <span class="it">January.</span></h2>
+      <p class="lead in"><span id="cta-days">000</span> days until doors open at Royce Hall.</p>
       <div class="btns in">
         <a class="pill cta" href="#tickets" data-tickets id="ticket-btn">Buy tickets <span class="arr">&rarr;</span></a>
         <a class="pill ghost" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen</a>
       </div>
-      <nav class="links in" aria-label="Footer">
-        <a class="glass" href="about.html">NextGen 2025</a>
-        <a class="glass" href="program.html">Program</a>
-        <a class="glass" href="speakers.html">Speakers</a>
-        <a class="glass" href="#venue">Venue</a>
-        <a class="glass" href="#faq">FAQ</a>
-        <a class="glass" href="https://www.google.com/maps/search/?api=1&query=Royce+Hall+UCLA" target="_blank" rel="noopener">Directions</a>
-      </nav>
     </div>
 
     <p class="disc">NextGen is an independent event organized by HW Venture. It is not affiliated with, sponsored by, or endorsed by UCLA. Royce Hall is a rented venue.</p>
@@ -604,6 +596,7 @@
     document.getElementById('cd-d').textContent = pad(d, 2);
     document.getElementById('cd-h').textContent = pad(h, 2);
     document.getElementById('cd-m').textContent = pad(m, 2);
+    var cdd = document.getElementById('cta-days'); if (cdd) cdd.textContent = d;
   }
   tick(); setInterval(tick, 30000);
 
