@@ -177,6 +177,8 @@
   @keyframes breathe { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: .85; } 50% { transform: translate(-50%,-50%) scale(1.06); opacity: 1; } }
   .hub3 { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); width: min(56vh, 82vw); height: 84vh; z-index: 22; pointer-events: none; }
   .hub3 canvas { width: 100% !important; height: 100% !important; }
+  .hub3.flat { display: grid; place-items: center; }
+  .hub3.flat svg { width: 62%; height: auto; color: #2c2832; filter: drop-shadow(0 30px 40px rgba(60,20,40,0.35)); }
   .markshadow {
     position: absolute; left: 50%; top: 63vh; transform: translate(-50%, -50%); z-index: 21; pointer-events: none;
     width: 32vh; height: 5vh; border-radius: 50%; background: radial-gradient(closest-side, rgba(90,30,50,0.22), rgba(90,30,50,0));
@@ -596,7 +598,7 @@
   </footer>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
 <script>
 (function () {
   // ===== SITE CONFIG: paste the ticketing link here (Eventbrite, Luma, etc.) =====
@@ -659,10 +661,13 @@
   var heroVisible = true;
 
   // ---- 3D mark ----
-  if (!window.THREE) return;
   var hub = document.getElementById('hub3');
+  function flatMark() {   // no three.js or no WebGL: show the flat mark so the hero is never empty
+    var svg = document.querySelector('.nav .logo svg').cloneNode(true); svg.removeAttribute('aria-hidden'); hub.appendChild(svg); hub.classList.add('flat');
+  }
+  if (!window.THREE) { flatMark(); return; }
   var renderer;
-  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch (e) { return; }
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch (e) { flatMark(); return; }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.4));
   hub.appendChild(renderer.domElement);
   var scene = new THREE.Scene();
