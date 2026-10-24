@@ -289,7 +289,7 @@
   /* photo reel: vanilla port of the 21st.dev TiltedGridHero (tiles sliced into facets of a cylinder; see second script) */
   .reelhead { margin-top: clamp(56px, 7vw, 96px); margin-bottom: 22px; }
   .reel { position: relative; overflow: hidden; container-type: size; height: clamp(260px, 25vw, 480px); margin-top: 0;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); mask-image: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); }
+    -webkit-mask-image: linear-gradient(90deg, transparent 5%, #000 22%, #000 78%, transparent 95%); mask-image: linear-gradient(90deg, transparent 5%, #000 22%, #000 78%, transparent 95%); }
   .reel-band { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .5s ease; }
   .reel-tile { position: absolute; transform-style: preserve-3d; }
   .reel-strip { position: absolute; top: 0; overflow: hidden; background: var(--paper-2); }
@@ -862,7 +862,13 @@
       var h = Math.min(tileHeight / 100 * height, (MAX_WIDTH / 100 * width) / aspect), rad = width * arc(bend);
       if (!(h > 0) || !(rad > 0)) return { columns: 2, sweep: 0, unit: 0, limit: 0 };
       var deg = function (x) { return x * 180 / Math.PI; };
-      var unit = deg(h / rad), pitch = (aspect + gap / 100) * unit, limit = deg(bend) + aspect * unit * 1.1;
+      var unit = deg(h / rad), pitch = (aspect + gap / 100) * unit;
+      // hide point: the row recedes, so angles compress toward the centre; walk the arc until the tile's inner edge
+      // projects past 94% of the half-width (inside the fully transparent part of the mask), instead of guessing
+      var half = 0.5 / arc(bend), target = 0.94 * half, halfTile = (aspect * (h / rad)) / 2;
+      function projX(th) { return Math.sin(th) * CAMERA / (CAMERA + 1 - Math.cos(th)); }
+      var th = bend; while (th < Math.PI * 0.85 && projX(th - halfTile) < target) th += 0.005;
+      var limit = deg(th);
       var columns = Math.min(60, Math.max(2, Math.ceil(2 * limit / pitch)));
       var sweep = +((columns * pitch) / 2).toFixed(4);
       return { columns: columns, sweep: sweep, unit: +unit.toFixed(4), limit: +Math.min(sweep, limit).toFixed(4) };
