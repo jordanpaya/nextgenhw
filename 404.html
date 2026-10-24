@@ -420,7 +420,7 @@
   <div class="ruler" style="left:18px" aria-hidden="true"><span class="rlbl" style="left:-22px; transform:rotate(180deg)">01 &middot; 23 &middot; 27</span></div>
   <div class="ruler" style="right:18px" aria-hidden="true"><span class="rlbl" style="right:-22px">ROYCE HALL</span></div>
   <div class="markshadow" aria-hidden="true"></div>
-  <div class="buylab" aria-hidden="true">GET TICKETS</div>
+  <div class="buylab" aria-hidden="true">TICKETS COMING SOON</div>
   <div class="hub3" id="hub3" aria-hidden="true"></div>
 
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NextGen Conference, January 23, 2027, Royce Hall at UCLA</h1>
@@ -584,6 +584,7 @@
       a.href = TICKET_URL; a.target = '_blank'; a.rel = 'noopener';
       a.innerHTML = 'Buy tickets <span class="arr">&rarr;</span>';   // label is "Tickets coming soon" until the link exists
     });
+    var bl = document.querySelector('.buylab'); if (bl) bl.textContent = 'GET TICKETS';
   }
 
   // ---- countdown ----
