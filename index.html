@@ -406,7 +406,7 @@
     <ul>
       <li class="hm"><a href="about.html">NextGen 2025</a></li>
       <li class="hs"><a href="speakers.html">Speakers</a></li>
-      <li><a class="pill cta" href="#tickets" data-tickets>Buy tickets <span class="arr">&rarr;</span></a></li>
+      <li><a class="pill cta" href="#tickets" data-tickets>Tickets coming soon <span class="arr">&rarr;</span></a></li>
     </ul>
 </nav>
 
@@ -543,7 +543,7 @@
       <details><summary>Who organizes NextGen?<span class="pm">+</span></summary><p>NextGen is built by a team of fifteen high school students. Our first conference brought together more than 325 attendees, and it came together in under eight months.</p></details>
       <details><summary>How do I stay updated?<span class="pm">+</span></summary><p>Follow <a href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">@hwnextgen</a> on Instagram for speaker announcements and ticket updates, and visit nextgenhw.com.</p></details>
     </div>
-    <a class="more reveal" href="#tickets" data-tickets>Buy tickets <span class="arr">&rarr;</span></a>
+    <a class="more reveal" href="#tickets" data-tickets>Tickets coming soon <span class="arr">&rarr;</span></a>
   </div>
 </section>
 </main>
@@ -559,7 +559,7 @@
     <div class="mid">
       <h2 class="h2 in">See you in <span class="it">January.</span></h2>
       <div class="btns in">
-        <a class="pill cta" href="#tickets" data-tickets id="ticket-btn">Buy tickets <span class="arr">&rarr;</span></a>
+        <a class="pill cta" href="#tickets" data-tickets id="ticket-btn">Tickets coming soon <span class="arr">&rarr;</span></a>
         <a class="pill ghost" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen</a>
       </div>
     </div>
@@ -581,6 +581,7 @@
   if (TICKET_URL) {
     document.querySelectorAll('[data-tickets]').forEach(function (a) {
       a.href = TICKET_URL; a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = 'Buy tickets <span class="arr">&rarr;</span>';   // label is "Tickets coming soon" until the link exists
     });
   }
 

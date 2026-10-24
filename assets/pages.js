@@ -3,7 +3,7 @@
   // ===== SITE CONFIG: keep in sync with TICKET_URL in nextgen-site.html =====
   var TICKET_URL = '';
   if (TICKET_URL) {
-    document.querySelectorAll('[data-tickets]').forEach(function (a) { a.href = TICKET_URL; a.target = '_blank'; a.rel = 'noopener'; });
+    document.querySelectorAll('[data-tickets]').forEach(function (a) { a.href = TICKET_URL; a.target = '_blank'; a.rel = 'noopener'; a.innerHTML = 'Buy tickets <span class="arr">&rarr;</span>'; });
   }
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
