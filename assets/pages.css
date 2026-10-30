@@ -204,6 +204,7 @@ section.block + section.block { padding-top: 0; }
   .locked { grid-template-columns: 1fr; }
   .pfoot .bottom { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 12px; }
   .pfoot .bottom > :first-child, .pfoot .bottom .badge, .totop { justify-self: center; }
+  .pfoot .bottom > :first-child { text-align: center; }   /* the desktop left-align rule above otherwise wins on phones */
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
