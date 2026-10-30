@@ -208,7 +208,7 @@
 
   .hero-foot {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 40;
-    display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: 24px;
+    display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 24px;
     padding: 0 clamp(20px, 3vw, 44px) clamp(20px, 4vh, 40px);
   }
   .hero-date .kick { font-size: 13px; font-weight: 600; letter-spacing: 0.28em; opacity: 0.9; }
@@ -449,20 +449,9 @@
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NextGen Conference, January 23, 2027, Los Angeles</h1>
 
   <div class="hero-foot">
-    <div class="hero-date">
-      <div class="kick">THE FUTURE STARTS HERE</div>
-      <div class="big">January 23, 2027<br>Los Angeles, <span class="it">CA</span></div>
-    </div>
     <div class="hero-cta">
       <a class="pill cta" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen <span class="arr">&rarr;</span></a>
       <a class="pill ghost" href="speakers.html">Meet the speakers</a>
-    </div>
-    <div class="countdown" aria-label="Countdown to doors open">
-      <div class="nums">
-        <div><div class="n" id="cd-d">000</div><div class="l">DAYS</div></div>
-        <div><div class="n" id="cd-h">00</div><div class="l">HRS</div></div>
-        <div><div class="n" id="cd-m">00</div><div class="l">MIN</div></div>
-      </div>
     </div>
   </div>
 </section>
@@ -597,9 +586,7 @@
   function tick() {
     var ms = Math.max(0, doors - new Date());
     var d = Math.floor(ms / 86400000), h = Math.floor(ms / 3600000) % 24, m = Math.floor(ms / 60000) % 60;
-    document.getElementById('cd-d').textContent = pad(d, 2);
-    document.getElementById('cd-h').textContent = pad(h, 2);
-    document.getElementById('cd-m').textContent = pad(m, 2);
+    ['cd-d', 'cd-h', 'cd-m'].forEach(function (id, i) { var el = document.getElementById(id); if (el) el.textContent = pad([d, h, m][i], 2); });
     var cdd = document.getElementById('cta-days'); if (cdd) cdd.textContent = d;
   }
   tick(); setInterval(tick, 30000);
