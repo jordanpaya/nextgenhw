@@ -227,6 +227,10 @@
   .shead .lead { margin-top: 20px; }
   .shead.light, .shead.light .eyebrow, .shead.light .eyebrow i, .shead.light .lead { color: #fff; }
   .shead.light .eyebrow, .shead.light .lead { opacity: 0.9; }
+  /* venue headline: NextGen measurably larger (UCLA rule), the venue in the serif accent so it stays the focus */
+  .vh2 { line-height: 1.04; }
+  .vh2 .ng { font-size: 1.12em; }
+  .vh2 .it { font-weight: 700; letter-spacing: -0.01em; }
   .fstage .eyebrow i { color: #fff; }
   /* every section ends with one of these */
   .more { display: inline-flex; align-items: center; gap: 10px; margin-top: 36px; font-weight: 700; font-size: 16px; color: var(--ink); text-decoration: none; border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
@@ -517,8 +521,8 @@
   <div class="wrap inner">
     <div class="shead light reveal" style="margin-bottom:0">
       <div class="eyebrow">Venue</div>
-      <h2 class="h2">NextGen 2027</h2>
-      <p class="lead">Royce Hall, UCLA. Saturday, January 23, 2027. Doors open at 9:00 AM.</p>
+      <h2 class="h2 vh2"><span class="ng">NextGen</span> @<br><span class="it">UCLA Royce Hall</span></h2>
+      <p class="lead">Saturday, January 23, 2027. Doors open at 9:00 AM.</p>
     </div>
     <div class="details reveal" id="venue-card">
       <dl>
