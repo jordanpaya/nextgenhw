@@ -289,6 +289,9 @@
   .kfacts span { font-size: 12.5px; font-weight: 600; padding: 8px 12px; white-space: nowrap; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink-2); transition: color .25s ease, border-color .25s ease, transform .25s ease; }
   .kfacts span:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
   .kphoto .ktag { position: absolute; z-index: 2; left: 18px; top: 18px; background: var(--mesh); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; padding: 10px 16px; border-radius: 999px; }
+  /* keynote label: badge on the photo plus the eyebrow directly above the name (was floating over the photo column) */
+  .klab { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--ink); font-size: 13px; }
+  .klab::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--orange); }
   .krole { margin-top: 14px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 600; color: var(--ink-2); }
   .note { margin-top: 28px; font-size: 15px; color: var(--ink-2); }
 
@@ -454,12 +457,13 @@
 <!-- ================= 01 KEYNOTE ================= -->
 <section class="block" id="keynote">
   <div class="wrap">
-    <div class="shead reveal"><div class="eyebrow">Keynote speaker</div></div>
     <div class="keynote">
       <div class="kwrap reveal"><div class="kphoto" id="kphoto" data-tilt>
+      <span class="ktag">Keynote</span>
       <img src="assets/photos/evan-spiegel.jpg?v=5" alt="Evan Spiegel" loading="lazy">
     </div></div>
       <div class="reveal">
+        <div class="eyebrow klab">Keynote speaker</div>
         <h2 class="h2">Evan Spiegel</h2>
         <div class="krole">Co-founder and CEO, Snap Inc.</div>
         <p class="lead" style="margin-top:22px">Evan Spiegel started Snapchat as a Stanford student in 2011 and has run the company ever since, taking Snap public in 2017 and building it into the company behind Snapchat and Spectacles. In 2015, at 24, he became the youngest billionaire in the world. He grew up in Los Angeles. He takes the NextGen main stage on January 23.</p>
