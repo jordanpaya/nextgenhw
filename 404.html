@@ -391,9 +391,10 @@
   @media (max-width: 640px) {
     .nav ul li.hs { display: none; }
     .nav .pill.cta { font-size: 13px; padding: 10px 16px; }
-    .glyph { font-size: 6.5vh; top: 40%; }
-    .glyph.dot { font-size: 3vh; }
-    .tilt { transform: rotateX(-12deg); transform-origin: 50% 40%; }
+    .glyph { font-size: 5.6vh; top: 40%; }
+    .glyph.dot { font-size: 2.6vh; }
+    .hub3 { width: 70vw; height: 62vh; }   /* phones: the mark's on-screen size follows the canvas HEIGHT (vertical fov); 84vh swallowed the ring */
+    .tilt { transform: rotateZ(-8deg) rotateX(-26deg); transform-origin: 50% 40%; }   /* phones were nearly flat (-12deg) and read as a band through the mark (Oct 31) */
     .persp { perspective-origin: 50% 40%; }
     .stage { transform-origin: 50% 40%; }
     .hero-cta .pill.ghost { display: none; }
@@ -607,7 +608,7 @@
   // words is twice a letter step and reads as a word space. Phones keep three copies on the smaller ring.
   var COPIES = MOBILE ? 3 : 4, LSTEP = MOBILE ? 14 : 11.25, ARC = 360 / COPIES;
   var RING = 'NEXTGEN\u00b7'.repeat(COPIES), N = RING.length;
-  var RING_R = MOBILE ? '22vh' : '40vh';
+  var RING_R = MOBILE ? '40vw' : '40vh';   // phones: size the ring by width so the side letters stay on screen
   document.addEventListener('keydown', function (e) {   // g: cycle the glow for comparison
     if (e.key !== 'g' && e.key !== 'G') return;
     var b = document.body, states = ['', 'aura-orange', 'aura-off'], cur = states.findIndex(function (c) { return c && b.classList.contains(c); });
