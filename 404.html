@@ -349,7 +349,8 @@
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent); }
   .fstage .rep { position: absolute; inset: 0; z-index: -1; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; will-change: transform, opacity; }
   .fstage .rep span { font-weight: 900; font-size: clamp(60px, 11vw, 170px); line-height: 0.92; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.16); white-space: nowrap; }
-  .fstage .strip { position: relative; z-index: 2; margin-top: 100px; /* clears the fixed nav bar */ transform: rotate(-2deg) scale(1.08); border-top: 1px solid rgba(255,255,255,0.35); border-bottom: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); overflow: hidden; padding: 12px 0; }
+  .fstage .strip { position: relative; z-index: 2; margin-top: 100px; /* clears the fixed nav bar */ transform: rotate(-2deg) scale(1.08); border-top: 1px solid rgba(255,255,255,0.35); border-bottom: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.12); overflow: hidden; padding: 12px 0; }
+  @media (min-width: 641px) { .fstage .strip { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); } }   /* desktop only: iOS Safari drops the marquee text whenever the strip declares a backdrop blur, even one overridden to none in a phone media query (Oct 31) */
   .fstage .strip .mqt { display: flex; width: max-content; animation: mq 40s linear infinite; font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; }
   .fstage .strip .mqt span { padding: 0 1.6em; }
   .fstage .strip .mqt i { font-style: normal; opacity: 0.6; }
@@ -393,6 +394,8 @@
     .nav .pill.cta { font-size: 13px; padding: 10px 16px; }
     .glyph { font-size: 5.6vh; top: 40%; }
     .glyph.dot { font-size: 2.6vh; }
+    .aura { animation: none; filter: blur(18px); width: 110vw; height: 110vw; max-width: none; max-height: none; }   /* phones: a 112vh blur(40px) layer re-blurred every frame by the breathe animation was the main jank */
+    .glyph { will-change: transform, opacity; }
     .hub3 { width: 70vw; height: 62vh; }   /* phones: the mark's on-screen size follows the canvas HEIGHT (vertical fov); 84vh swallowed the ring */
     .tilt { transform: rotateZ(-8deg) rotateX(-26deg); transform-origin: 50% 40%; }   /* phones were nearly flat (-12deg) and read as a band through the mark (Oct 31) */
     .persp { perspective-origin: 50% 40%; }
@@ -406,7 +409,7 @@
     .faq details p { padding-right: 0; }
     .fstage .bottom { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 12px; }
     .fstage .bottom > :first-child, .fstage .bottom .badge, .fstage .bottom .totop { justify-self: center; }
-    .fstage .strip { margin-top: 86px; backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.16); }   /* iOS Safari drops the marquee text entirely when the strip has a backdrop blur (iPhone check, Oct 30) */
+    .fstage .strip { margin-top: 72px; background: rgba(255,255,255,0.16); }   /* phones: sits just under the nav, clear of the headline */
     .fstage .strip .mqt { font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -648,7 +651,7 @@
   if (!window.THREE) { flatMark(); return; }
   var renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); } catch (e) { flatMark(); return; }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.4));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.matchMedia('(max-width: 640px)').matches ? 1.25 : 1.4));   // phones render fewer pixels (Oct 31)
   hub.appendChild(renderer.domElement);
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(49, 1, 0.1, 100);
