@@ -422,6 +422,73 @@
     html { scroll-behavior: auto; }
   }
 </style>
+
+<style id="mystery-keynote">
+  /* mystery keynote cards. Sizes inside a card are in cqw so the art scales with the card. Variant classes are km-<key>:
+     bare names like stage, glass and lock already mean something else on this site. */
+  .kphoto.kmyst { background: var(--mesh); container-type: inline-size; color: #fff; }
+  .kmyst .sil { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .kmyst .sil .body { fill: #17141a; filter: blur(3px); }
+  .kmyst .q { position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%); z-index: 2; font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 26cqw; line-height: 1; color: #fff; text-shadow: 0 2cqw 8cqw rgba(0,0,0,0.35); animation: kmq 4.5s ease-in-out infinite; }
+  .kmyst .q.big { top: 46%; font-size: 56cqw; }
+  .kmyst .sweep { position: absolute; top: -20%; bottom: -20%; left: 0; width: 45%; z-index: 2; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.20) 50%, rgba(255,255,255,0) 100%);
+    transform: translateX(-160%) skewX(-14deg); animation: kmsweep 5.5s ease-in-out infinite; }
+  .kmyst .soon { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3; white-space: nowrap; background: rgba(23,20,26,0.84); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.25); }
+  .kmyst .rings { position: absolute; inset: 0; display: grid; place-items: center; }
+  .kmyst .rings i { grid-area: 1 / 1; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.38); width: 46%; aspect-ratio: 1; }
+  .kmyst .rings i:nth-child(2) { width: 72%; border-color: rgba(255,255,255,0.24); }
+  .kmyst .rings i:nth-child(3) { width: 100%; border-color: rgba(255,255,255,0.13); }
+  /* C: classified file */
+  .kmyst.km-file { background: radial-gradient(90% 50% at 100% 0%, rgba(133,179,234,0.20), rgba(23,20,26,0) 70%), #17141a; }
+  .kmyst.km-file .doc { position: absolute; left: 9%; right: 9%; top: 9%; }
+  .kmyst .hd { display: flex; justify-content: space-between; align-items: baseline; font-size: 2.5cqw; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.6); padding-bottom: 3.4cqw; border-bottom: 1px solid rgba(255,255,255,0.18); }
+  .kmyst .hd b { color: #fff; font-weight: 700; }
+  .kmyst.km-file dl { margin: 4.4cqw 0 0; display: block; }   /* block, not grid: a grid gap also lands between each label and its bar and pushed the last row under the pill on phones */
+  .kmyst.km-file dt { font-size: 2.4cqw; line-height: 1.5; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin: 4.6cqw 0 1.8cqw; padding: 0; }
+  .kmyst.km-file dt:first-child { margin-top: 0; }
+  .kmyst.km-file dd { margin: 0; display: flex; gap: 2.2cqw; }
+  .kmyst.km-file dd i { display: block; height: 6.4cqw; border-radius: 1cqw; background: linear-gradient(90deg, #85b3ea, #eb82b6 55%, #e95f27); }
+  .kmyst.km-file dd.ok { font-size: 6cqw; line-height: 1.2; font-weight: 800; letter-spacing: -0.01em; color: #fff; }
+  .kmyst.km-file .stamp { position: absolute; right: 7%; bottom: 24%; z-index: 2; transform: rotate(-11deg); border: 0.7cqw solid #e95f27; color: #e95f27; border-radius: 1.6cqw;
+    font-size: 4.6cqw; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; padding: 1.6cqw 3.2cqw 1.6cqw 3.6cqw; }
+  /* D: lock */
+  .kmyst .lockico { position: absolute; left: 50%; top: 46%; width: 34%; transform: translate(-50%, -50%); z-index: 2; filter: drop-shadow(0 2cqw 5cqw rgba(60,20,40,0.35)); }
+  .kmyst .lockico rect { fill: #fff; }
+  .kmyst .lockico .sh { fill: none; stroke: #fff; stroke-width: 5.5; stroke-linecap: round; }
+  .kmyst .lockico .hole { fill: #17141a; }
+  /* E: fluted glass over a soft figure */
+  .kmyst.km-glass .sil .body { filter: blur(9px); }
+  .kmyst .flutes { position: absolute; inset: 0; z-index: 1;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.26) 0cqw, rgba(255,255,255,0.03) 2.4cqw, rgba(23,20,26,0.12) 4.4cqw, rgba(255,255,255,0.26) 4.6cqw); }
+  /* F: three clues */
+  .kmyst.km-clues { background: radial-gradient(130% 62% at 50% 118%, rgba(233,95,39,0.62), rgba(235,130,182,0.28) 46%, rgba(23,20,26,0) 72%), #17141a; }
+  .kmyst.km-clues .cl { position: absolute; left: 9%; right: 9%; top: 9%; }
+  .kmyst.km-clues ol { list-style: none; margin: 0; padding: 0; }
+  .kmyst.km-clues li { display: grid; grid-template-columns: 13cqw 1fr; align-items: baseline; padding: 5cqw 0; border-bottom: 1px solid rgba(255,255,255,0.16); }
+  .kmyst.km-clues li em { font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 5.4cqw; color: #eb82b6; }
+  .kmyst.km-clues li span { font-size: 7cqw; font-weight: 800; line-height: 1.12; letter-spacing: -0.02em; }
+  /* G: empty spotlight */
+  .kmyst.km-stage { background: #17141a; }
+  .kmyst .cone { position: absolute; inset: 0; filter: blur(2.4cqw); }
+  .kmyst .cone i { position: absolute; inset: 0; clip-path: polygon(45% 0, 55% 0, 88% 84%, 12% 84%); background: linear-gradient(to bottom, rgba(255,255,255,0.62), rgba(255,255,255,0.07)); }
+  .kmyst .pool { position: absolute; left: 6%; right: 6%; bottom: 13%; height: 13%; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255,255,255,0.66), rgba(235,130,182,0.42) 55%, rgba(233,95,39,0) 100%); }
+  .kmyst.km-stage .q { top: 50%; }
+  @keyframes kmsweep { 0%, 55% { transform: translateX(-160%) skewX(-14deg); } 100% { transform: translateX(340%) skewX(-14deg); } }
+  @keyframes kmq { 0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); } }
+  .kmore { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; font-weight: 700; font-size: 16px; color: var(--ink); text-decoration: none; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  .kmore .arr { transition: transform .25s ease; }
+  .kmore:hover .arr { transform: translateX(5px); }
+  /* comparison page only */
+  .vtag { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; margin-bottom: 30px; font-size: 13px; font-weight: 600; color: var(--ink-3); }
+  .vtag b { font-size: 12px; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 14px; }
+  .vtag strong { font-size: 17px; font-weight: 800; color: var(--ink); }
+  .vsec + .vsec { border-top: 1px solid rgba(23,20,26,0.12); }
+  @media (prefers-reduced-motion: reduce) { .kmyst .sweep, .kmyst .q { animation: none; } }
+</style>
 </head>
 <body>
 <a class="skip" href="#about">Skip to content</a>
@@ -464,16 +531,17 @@
 <section class="block" id="keynote">
   <div class="wrap">
     <div class="keynote">
-      <div class="kwrap reveal"><div class="kphoto" id="kphoto" data-tilt>
-      <img src="assets/photos/evan-spiegel.jpg?v=5" alt="Evan Spiegel" loading="lazy">
+      <div class="kwrap reveal"><div class="kphoto kmyst km-stage" id="kphoto" data-tilt role="img" aria-label="Keynote speaker, to be revealed">
+      <span class="cone" aria-hidden="true"><i></i></span><span class="pool" aria-hidden="true"></span><span class="q" aria-hidden="true">?</span>
+      <span class="soon">Reveal coming soon</span>
     </div></div>
       <div class="reveal">
         <div class="eyebrow klab">Keynote speaker</div>
-        <h2 class="h2">Evan Spiegel</h2>
-        <div class="krole">Co-founder and CEO, Snap Inc.</div>
-        <p class="lead" style="margin-top:22px">Evan Spiegel started Snapchat as a Stanford student in 2011 and has run the company ever since, taking Snap public in 2017 and building it into the company behind Snapchat and Spectacles. In 2015, at 24, he became the youngest billionaire in the world. He grew up in Los Angeles. He takes the NextGen main stage on January 23.</p>
-        <div class="kfacts"><span>Snapchat, 2011</span><span>Youngest billionaire, 2015</span><span>Snap IPO, 2017</span><span>LA native</span></div>
-        <a class="more" href="speakers.html">All speakers <span class="arr">&rarr;</span></a>
+        <h2 class="h2">The stage is set.</h2>
+        <div class="krole">Keynote reveal coming soon</div>
+        <p class="lead" style="margin-top:22px">The main stage has its opener for NextGen 2027. We are keeping the spotlight off the name a little longer. Here is what we can say for now.</p>
+        <div class="kfacts"><span>Founder and CEO</span><span>Built something you use</span><span>Started as a student</span></div>
+        <a class="kmore" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen for the reveal <span class="arr">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -490,7 +558,7 @@
     <div class="tilt-wrap"><div class="program" id="program-card">
       <div class="bgm" aria-hidden="true"></div>
       <div class="items">
-        <div class="item"><span class="num">01</span><div><h3>Keynotes</h3><p>Main-stage talks from the people building what&rsquo;s next. This year opens with Evan Spiegel.</p></div></div>
+        <div class="item"><span class="num">01</span><div><h3>Keynotes</h3><p>Main-stage talks from the people building what&rsquo;s next. This year&rsquo;s keynote is revealed soon.</p></div></div>
         <div class="item"><span class="num">02</span><div><h3>Startup Hall</h3><p>Founders and early teams showing what they&rsquo;re building, and taking your questions.</p></div></div>
         <div class="item"><span class="num">03</span><div><h3>Tech Demos</h3><p>Emerging technology you can actually put on, pick up and try.</p></div></div>
         <div class="item"><span class="num">04</span><div><h3>Breakout Sessions</h3><p>Small-room panels and discussions where the audience talks back.</p></div></div>
