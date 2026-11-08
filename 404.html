@@ -351,7 +351,7 @@
   .fstage .rep span { font-weight: 900; font-size: clamp(60px, 11vw, 170px); line-height: 0.92; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.16); white-space: nowrap; }
   .fstage .strip { position: relative; z-index: 2; margin-top: 100px; /* clears the fixed nav bar */ transform: rotate(-2deg) scale(1.08); border-top: 1px solid rgba(255,255,255,0.35); border-bottom: 1px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.16); overflow: hidden; padding: 12px 0; }
   /* no backdrop blur on the strip, at any width: Safari drops the marquee text when the strip declares one (always on iOS, now and then on the Mac). Oct 31, Nov 4 */
-  .fstage .strip .mqt { display: flex; width: max-content; animation: mq 40s linear infinite; font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; }
+  .fstage .strip .mqt { display: flex; width: max-content; font-size: 12px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; }
   .fstage .strip .mqt span { padding: 0 1.6em; }
   .fstage .strip .mqt i { font-style: normal; opacity: 0.6; }
   .fstage .mid { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px, 4vw, 48px) 9vh; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
@@ -413,7 +413,7 @@
     .fstage .strip .mqt { font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .aura, .fstage .strip .mqt { animation: none !important; }
+    .aura { animation: none !important; }
     .stage { animation: none !important; }
     .stage, .glyph { animation: none !important; }
     .phrase:first-child { opacity: 1 !important; }
@@ -606,7 +606,7 @@
       <details><summary>What is NextGen?<span class="pm">+</span></summary><p>NextGen is a one-day futurism conference in Los Angeles: keynotes, panels, hands-on tech demos and a startup hall, built around one question: what comes next? NextGen 2025 brought together more than 325 people.</p></details>
       <details><summary>Who is it for?<span class="pm">+</span></summary><p>Students and members of the broader Los Angeles community who are curious about where technology is headed. No background required, just curiosity.</p></details>
       <details><summary>When and where is NextGen?<span class="pm">+</span></summary><p>Saturday, January 23, 2027 in Los Angeles. Venue details are announced soon. Doors open at 9:00 AM.</p></details>
-      <details><summary>What is the attire?<span class="pm">+</span></summary><p>Business casual. You&rsquo;ll be moving between the main stage, breakout rooms and the demo floor, so comfortable shoes are a good idea.</p></details>
+      <details><summary>What is the attire?<span class="pm">+</span></summary><p>There is no dress code. Most people go business casual, but wear whatever you are comfortable in. You&rsquo;ll be moving between the main stage, breakout rooms and the demo floor, so comfortable shoes are a good idea.</p></details>
       <details><summary>What will the day look like?<span class="pm">+</span></summary><p>Doors open at 9:00 AM. The day opens on the main stage with the keynote, then splits into panels and breakout sessions where the audience does the questioning. Between sessions, tech demos put emerging hardware in your hands, and the startup hall is open all day to meet founders building what&rsquo;s next.</p></details>
     </div>
     <a class="more reveal" href="#tickets" data-tickets>Tickets coming soon</a>
@@ -844,9 +844,34 @@
   function ease(x) { return 1 - Math.pow(1 - x, 3); }
 
   // ---- stage marquee ----
-  var smq = document.getElementById('stage-mq'), su = '';
-  for (var i = 0; i < 3; i++) su += '<span>Explore</span><i>&#10022;</i><span>Discover</span><i>&#10022;</i><span>Innovate</span><i>&#10022;</i><span>Empower</span><i>&#10022;</i><span>Imagine</span><i>&#10022;</i><span>January 23, 2027</span><i>&#10022;</i><span>Los Angeles, CA</span><i>&#10022;</i>';
-  smq.innerHTML = su + su;
+  // Driven from script, not a CSS animation: Safari (Mac now and then, iOS always) left the band empty when the
+  // text track was a composited animated layer. A plain translateX set each frame keeps the text in the strip's own
+  // paint, and the track is only as long as the viewport needs instead of a fixed six sets.
+  var smq = document.getElementById('stage-mq');
+  var su = '<span>Explore</span><i>&#10022;</i><span>Discover</span><i>&#10022;</i><span>Innovate</span><i>&#10022;</i><span>Empower</span><i>&#10022;</i><span>Imagine</span><i>&#10022;</i><span>January 23, 2027</span><i>&#10022;</i><span>Los Angeles, CA</span><i>&#10022;</i>';
+  var mqHalf = 0, mqX = 0, mqLast = 0, mqStill = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mqBuild() {
+    smq.innerHTML = su;
+    var one = smq.getBoundingClientRect().width || 1200;
+    var n = Math.ceil(window.innerWidth * 1.2 / one) + 1, half = '';
+    for (var i = 0; i < n; i++) half += su;
+    smq.innerHTML = half + half;
+    mqHalf = smq.getBoundingClientRect().width / 2;
+    mqX = 0; smq.style.transform = 'translateX(0)';
+  }
+  mqBuild();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(mqBuild);
+  window.addEventListener('resize', mqBuild);
+  function mqStep(t) {
+    if (!mqStill) {
+      if (mqLast) mqX -= Math.min(t - mqLast, 50) * 0.09;   // 90px per second, same pace as the old 40s loop
+      if (-mqX >= mqHalf) mqX += mqHalf;
+      smq.style.transform = 'translateX(' + mqX.toFixed(2) + 'px)';
+    }
+    mqLast = t;
+    requestAnimationFrame(mqStep);
+  }
+  requestAnimationFrame(mqStep);
 
   // ---- scroll-driven: program card tilt + curtain reveal ----
   var card = document.getElementById('program-card');
