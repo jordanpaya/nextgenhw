@@ -108,6 +108,8 @@ section.block + section.block { padding-top: 0; }
 .prose .photo figcaption { margin-top: 10px; font-size: 13px; color: var(--ink-3); letter-spacing: 0.02em; }
 /* keynote + locked speaker slots */
 .keynote { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.keynote.flip { grid-template-columns: 1.1fr 0.9fr; margin-top: clamp(72px, 10vw, 140px); }
+.keynote.flip > .kwrap { order: 2; }
 .kwrap { perspective: 1400px; }
 .kphoto { position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 4 / 5; box-shadow: 0 40px 80px -30px rgba(60,20,40,0.45); isolation: isolate;
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; will-change: transform; }
@@ -189,7 +191,8 @@ section.block + section.block { padding-top: 0; }
 
 @media (max-width: 960px) {
   .nav ul li.hm { display: none; }
-  .cols, .keynote { grid-template-columns: 1fr; }
+  .cols, .keynote, .keynote.flip { grid-template-columns: 1fr; }
+  .keynote.flip > .kwrap { order: 0; }
   .kfacts { flex-wrap: wrap; }
   .kphoto { max-width: 440px; }
   .locked { grid-template-columns: 1fr 1fr; }

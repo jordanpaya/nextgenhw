@@ -208,7 +208,13 @@
 
   .hero-foot {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 40;
-    display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 24px;
+    display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 18px;
+  }
+  .hero-when { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; padding: 13px 26px; border-radius: 999px; background: rgba(255,255,255,0.72); border: 1px solid rgba(23,20,26,0.10);
+    box-shadow: 0 18px 40px -22px rgba(60,20,40,0.45); font-size: clamp(15px, 1.35vw, 20px); font-weight: 600; color: var(--ink); text-align: center; }
+  .hero-when b { font-weight: 800; }
+  .hero-when > span::before { content: '\00b7'; margin: 0 12px; opacity: 0.45; }
+  @media (max-width: 640px) { .hero-when { flex-direction: column; border-radius: 22px; padding: 12px 22px; font-size: 15px; } .hero-when > span::before { content: none; } .hero-when > span:last-child { display: none; }
     padding: 0 clamp(20px, 3vw, 44px) clamp(20px, 4vh, 40px);
   }
   .hero-date .kick { font-size: 13px; font-weight: 600; letter-spacing: 0.28em; opacity: 0.9; }
@@ -285,6 +291,8 @@
 
   /* keynote */
   .keynote { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+  .keynote.flip { grid-template-columns: 1.1fr 0.9fr; margin-top: clamp(72px, 10vw, 140px); }   /* second keynote: photo on the right */
+  .keynote.flip > .kwrap { order: 2; }
   .kwrap { perspective: 1400px; }
   .kphoto { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 5; box-shadow: var(--shadow); isolation: isolate;
     transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--py, 0px)); transition: transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .5s ease; will-change: transform; }
@@ -356,6 +364,8 @@
   .fstage .strip .mqt i { font-style: normal; opacity: 0.6; }
   .fstage .mid { position: relative; z-index: 2; text-align: center; padding: 0 clamp(20px, 4vw, 48px) 9vh; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
   .fstage .h2 { font-size: clamp(48px, 9vw, 140px); }
+  .fstage .lead.when i { font-style: normal; opacity: 0.7; }
+  .fstage .lead.when { font-weight: 700; font-size: clamp(17px, 1.7vw, 24px); }
   .fstage .lead { color: rgba(255,255,255,0.92); margin: 20px auto 0; text-align: center; }
   .fstage .btns { margin-top: 44px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
   .fstage .btns .pill { font-size: clamp(18px, 1.6vw, 24px); padding: clamp(18px, 1.6vw, 26px) clamp(34px, 3vw, 52px); }
@@ -383,7 +393,8 @@
     .countdown { justify-self: center; text-align: center; }
     .countdown .nums { justify-content: center; }
     .hero-date { text-align: center; }
-    .about, .faq, .venue .inner, .keynote { grid-template-columns: 1fr; }
+    .about, .faq, .venue .inner, .keynote, .keynote.flip { grid-template-columns: 1fr; }
+    .keynote.flip > .kwrap { order: 0; }
     .kfacts { flex-wrap: wrap; }
     .kphoto { max-width: 440px; }
     footer .top { grid-template-columns: 1fr 1fr; }
@@ -409,7 +420,12 @@
     .faq details p { padding-right: 0; }
     .fstage .bottom { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 12px; }
     .fstage .bottom > :first-child, .fstage .bottom .badge, .fstage .bottom .totop { justify-self: center; }
-    .fstage .strip { margin-top: 72px; }   /* phones: sits just under the nav, clear of the headline */
+    .fstage .strip { margin-top: 72px; }
+    .fstage .lead.when { margin-top: 12px; font-size: 17px; line-height: 1.45; }   /* phones: date and time on a line each, and the stack tightened to make room for them */
+    .fstage .lead.when span { display: block; }
+    .fstage .lead.when i { display: none; }
+    .fstage .btns { margin-top: 26px; }
+    .fstage .mid { padding-bottom: 3vh; }   /* phones: sits just under the nav, clear of the headline */
     .fstage .strip .mqt { font-size: 11px; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -520,6 +536,7 @@
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NextGen Conference, January 23, 2027, Los Angeles</h1>
 
   <div class="hero-foot">
+    <div class="hero-when"><b>Saturday, January 23, 2027</b><span>10:00 AM to 2:30 PM</span><span>Los Angeles, <span class="it">CA</span></span></div>
     <div class="hero-cta">
       <a class="pill cta" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen <span class="arr">&rarr;</span></a>
       <a class="pill ghost" href="speakers.html">Meet the speakers</a>
@@ -532,6 +549,18 @@
 <section class="block" id="keynote">
   <div class="wrap">
     <div class="keynote">
+      <div class="kwrap reveal"><div class="kphoto" data-tilt>
+      <img src="assets/photos/kara-swisher.jpg?v=1" alt="Kara Swisher" loading="lazy">
+    </div></div>
+      <div class="reveal">
+        <div class="eyebrow klab">Keynote speaker</div>
+        <h2 class="h2">Kara Swisher</h2>
+        <div class="krole">Tech journalist, podcaster and author</div>
+        <p class="lead" style="margin-top:22px">Kara Swisher has spent decades interviewing and challenging some of the most powerful figures in technology. She hosts <em>On with Kara Swisher</em>, co-hosts <em>Pivot</em> with Scott Galloway and recently launched <em>High Stakes</em>, a new podcast with former Secretary of State Hillary Clinton. She wrote <em>Burn Book: A Tech Love Story</em>, an inside look at Silicon Valley&rsquo;s rise and its biggest personalities, and co-founded Recode and the All Things Digital conference.</p>
+        <div class="kfacts"><span>On with Kara Swisher</span><span>Pivot</span><span>Burn Book</span><span>Recode</span></div>
+      </div>
+    </div>
+    <div class="keynote flip">
       <div class="kwrap reveal"><div class="kphoto kmyst km-stage" id="kphoto" data-tilt role="img" aria-label="Keynote speaker, to be revealed">
       <span class="cone" aria-hidden="true"><i></i></span><span class="pool" aria-hidden="true"></span><span class="q" aria-hidden="true">?</span>
       <span class="soon">Reveal coming soon</span>
@@ -539,8 +568,8 @@
       <div class="reveal">
         <div class="eyebrow klab">Keynote speaker</div>
         <h2 class="h2">The stage is set.</h2>
-        <div class="krole">Keynote reveal coming soon</div>
-        <p class="lead" style="margin-top:22px">The main stage has its opener for NextGen 2027. We are keeping the spotlight off the name a little longer. Here is what we can say for now.</p>
+        <div class="krole">Second keynote, reveal coming soon</div>
+        <p class="lead" style="margin-top:22px">A second keynote is confirmed for NextGen 2027. We are keeping the spotlight off the name a little longer. Here is what we can say for now.</p>
         <div class="kfacts"><span>Founder and CEO</span><span>Built something you use</span><span>Started as a student</span></div>
         <a class="kmore" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen for the reveal <span class="arr">&rarr;</span></a>
       </div>
@@ -554,12 +583,12 @@
     <div class="shead reveal">
       <div class="eyebrow">The program</div>
       <h2 class="h2" style="white-space:nowrap">What to expect</h2>
-      <p class="lead">Doors open at 9:00 AM.</p>
+      <p class="lead"><b>Saturday, January 23, 2027, 10:00 AM to 2:30 PM.</b> Doors open at 9:00 AM.</p>
     </div>
     <div class="tilt-wrap"><div class="program" id="program-card">
       <div class="bgm" aria-hidden="true"></div>
       <div class="items">
-        <div class="item"><span class="num">01</span><div><h3>Keynotes</h3><p>Main-stage talks from the people building what&rsquo;s next. This year&rsquo;s keynote is revealed soon.</p></div></div>
+        <div class="item"><span class="num">01</span><div><h3>Keynotes</h3><p>Main-stage talks from the people building what&rsquo;s next. This year: Kara Swisher and a second keynote, revealed soon.</p></div></div>
         <div class="item"><span class="num">02</span><div><h3>Startup Hall</h3><p>Founders and early teams showing what they&rsquo;re building, and taking your questions.</p></div></div>
         <div class="item"><span class="num">03</span><div><h3>Tech Demos</h3><p>Emerging technology you can actually put on, pick up and try.</p></div></div>
         <div class="item"><span class="num">04</span><div><h3>Breakout Sessions</h3><p>Small-room panels and discussions where the audience talks back.</p></div></div>
@@ -605,9 +634,9 @@
     <div class="faq faqlist reveal">
       <details><summary>What is NextGen?<span class="pm">+</span></summary><p>NextGen is a one-day futurism conference in Los Angeles: keynotes, panels, hands-on tech demos and a startup hall, built around one question: what comes next? NextGen 2025 brought together more than 325 people.</p></details>
       <details><summary>Who is it for?<span class="pm">+</span></summary><p>Students and members of the broader Los Angeles community who are curious about where technology is headed. No background required, just curiosity.</p></details>
-      <details><summary>When and where is NextGen?<span class="pm">+</span></summary><p>Saturday, January 23, 2027 in Los Angeles. Venue details are announced soon. Doors open at 9:00 AM.</p></details>
+      <details><summary>When and where is NextGen?<span class="pm">+</span></summary><p>Saturday, January 23, 2027 in Los Angeles. Venue details are announced soon. Doors open at 9:00 AM and the program runs from 10:00 AM to 2:30 PM.</p></details>
       <details><summary>What is the attire?<span class="pm">+</span></summary><p>There is no dress code. Most people go business casual, but wear whatever you are comfortable in. You&rsquo;ll be moving between the main stage, breakout rooms and the demo floor, so comfortable shoes are a good idea.</p></details>
-      <details><summary>What will the day look like?<span class="pm">+</span></summary><p>Doors open at 9:00 AM. The day opens on the main stage with the keynote, then splits into panels and breakout sessions where the audience does the questioning. Between sessions, tech demos put emerging hardware in your hands, and the startup hall is open all day to meet founders building what&rsquo;s next.</p></details>
+      <details><summary>What will the day look like?<span class="pm">+</span></summary><p>Doors open at 9:00 AM and the program runs from 10:00 AM to 2:30 PM. The day opens on the main stage with the keynotes, then splits into panels and breakout sessions where the audience does the questioning. Between sessions, tech demos put emerging hardware in your hands, and the startup hall is open all day to meet founders building what&rsquo;s next.</p></details>
     </div>
     <a class="more reveal" href="#tickets" data-tickets>Tickets coming soon</a>
   </div>
@@ -624,6 +653,7 @@
 
     <div class="mid">
       <h2 class="h2 in">See you in <span class="it">January.</span></h2>
+      <p class="lead when in"><span>Saturday, January 23, 2027</span><i> &middot; </i><span>10:00 AM to 2:30 PM</span></p>
       <div class="btns in">
         <a class="pill cta" href="#tickets" data-tickets id="ticket-btn">Tickets coming soon</a>
         <a class="pill ghost" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen</a>
@@ -875,6 +905,7 @@
 
   // ---- scroll-driven: program card tilt + curtain reveal ----
   var card = document.getElementById('program-card');
+  var kps = document.querySelectorAll('.kphoto');
   var curtain = document.getElementById('tickets');
   var ins = document.querySelectorAll('.fstage .in');
   var ticking = false;
@@ -886,9 +917,8 @@
       card.style.transform = 'rotateX(' + (18 * (1 - p)).toFixed(2) + 'deg) scale(' + (0.96 + 0.04 * p).toFixed(4) + ')';
       card.style.opacity = (0.5 + 0.5 * p).toFixed(3);
     }
-    var kp = document.getElementById('kphoto');
-    if (kp && !reduced) {
-      var kr = kp.getBoundingClientRect();
+    for (var ki = 0; ki < kps.length && !reduced; ki++) {
+      var kp = kps[ki], kr = kp.getBoundingClientRect();
       var kpp = clamp((vh - kr.top) / (vh + kr.height));          // 0 entering, 1 leaving
       kp.style.setProperty('--py', ((0.5 - kpp) * 44).toFixed(1) + 'px');   // drifts up as you scroll past
     }
