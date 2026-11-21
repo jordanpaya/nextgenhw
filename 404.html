@@ -79,6 +79,11 @@
     transition: transform .5s cubic-bezier(.2,.8,.2,1), padding .4s ease, background .4s ease, color .4s ease, box-shadow .4s ease;
   }
   .nav.scrolled { color: var(--ink); background: rgba(250,247,245,0.82); backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); padding: 11px clamp(20px, 3vw, 44px); box-shadow: 0 1px 0 rgba(23,20,26,0.08), 0 12px 30px -20px rgba(23,20,26,0.35); }
+  /* date and time, beside the logo so they follow the page (Nov 20, 2026) */
+  .navwhen { margin: 0 auto 0 clamp(18px, 2.4vw, 34px); padding-left: clamp(18px, 2.4vw, 34px); border-left: 1px solid rgba(23,20,26,0.18); display: flex; align-items: center; white-space: nowrap; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  .navwhen b { font-weight: 800; }
+  .navwhen i { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); margin: 0 14px; }
+  @media (max-width: 1040px) { .navwhen { display: none; } }
   .nav .pill { font-size: 15px; padding: 13px 24px; background: var(--ink); color: #fff; box-shadow: 0 6px 24px rgba(23,20,26,0.16); }
   .nav.scrolled .pill:not(.cta) { background: var(--ink); color: #fff; box-shadow: none; padding: 10px 18px; font-size: 14px; }
   .nav.scrolled .logo svg { width: 30px; height: 30px; }
@@ -209,17 +214,17 @@
   .hero-foot {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 40;
     display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 24px;
-  }
-  .hero-when { position: absolute; left: 0; right: 0; top: clamp(84px, 11.5vh, 118px); z-index: 40; text-align: center; font-size: clamp(14px, 1.2vw, 18px); font-weight: 600; letter-spacing: 0.01em; color: var(--ink); }
-  .hero-when b { font-weight: 800; }
-  .hero-when > span::before { content: '\00b7'; margin: 0 12px; opacity: 0.45; }
-  @media (max-width: 640px) { .hero-when { top: 96px; font-size: 14.5px; line-height: 1.5; } .hero-when b { display: block; } .hero-when > span::before { content: none; } .hero-when > span:last-child { display: none; }
     padding: 0 clamp(20px, 3vw, 44px) clamp(40px, 8vh, 84px);
   }
   .hero-date .kick { font-size: 13px; font-weight: 600; letter-spacing: 0.28em; opacity: 0.9; }
   .hero-date .big { font-weight: 800; font-size: clamp(24px, 2.9vw, 40px); line-height: 1.1; margin-top: 6px; letter-spacing: -0.01em; }
   .hero-date .big .it { font-weight: 700; }
   .hero-cta { display: flex; gap: 12px; justify-content: center; }
+  /* narrow screens only: the nav bar has no room for the date there, so it sits as one small line under the bar */
+  .hero-when { display: none; position: absolute; left: 0; right: 0; top: 92px; z-index: 40; justify-content: center; align-items: center; white-space: nowrap; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+  .hero-when b { font-weight: 800; }
+  .hero-when i { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); margin: 0 10px; }
+  @media (max-width: 1040px) { .hero-when { display: flex; } }
   .countdown { justify-self: end; text-align: right; }
   .countdown .nums { display: flex; gap: 18px; justify-content: flex-end; }
   .countdown .n { font-weight: 800; font-size: clamp(24px, 2.6vw, 37px); line-height: 1; font-variant-numeric: tabular-nums; }
@@ -514,6 +519,7 @@
       <svg viewBox="-2 -2 126 110" aria-hidden="true"><path fill="currentColor" d="M0.0 4.5 L0.2 2.9 L0.6 1.6 L1.4 0.7 L2.4 0.1 L3.8 0.0 L5.4 0.2 L64.5 14.3 L66.1 14.9 L67.5 15.6 L68.5 16.7 L69.3 17.9 L69.7 19.4 L69.9 21.2 L69.9 80.7 L70.0 81.5 L70.2 82.2 L70.5 82.8 L71.0 83.3 L71.7 83.6 L72.4 83.9 L99.3 90.3 L100.0 90.4 L100.7 90.3 L101.2 90.1 L101.5 89.7 L101.7 89.1 L101.8 88.3 L101.8 70.3 L101.7 69.5 L101.5 68.8 L101.2 68.2 L100.7 67.7 L100.0 67.3 L99.3 67.1 L96.1 66.3 L94.7 65.9 L93.6 65.2 L92.7 64.3 L92.0 63.2 L91.6 62.0 L91.5 60.5 L91.5 58.8 L91.6 57.2 L92.1 55.9 L92.8 55.1 L93.8 54.6 L95.1 54.4 L96.7 54.7 L115.6 59.2 L117.2 59.7 L118.6 60.5 L119.6 61.5 L120.4 62.8 L120.8 64.3 L121.0 66.1 L121.0 101.7 L120.8 103.3 L120.4 104.6 L119.6 105.5 L118.6 106.1 L117.2 106.2 L115.6 106.0 L56.1 91.8 L54.5 91.3 L53.1 90.5 L52.1 89.4 L51.3 88.2 L50.9 86.7 L50.7 84.9 L50.7 25.4 L50.6 24.6 L50.4 23.9 L50.1 23.3 L49.6 22.8 L48.9 22.5 L48.2 22.2 L21.7 15.9 L21.0 15.8 L20.3 15.9 L19.8 16.1 L19.5 16.5 L19.3 17.1 L19.2 17.9 L19.2 77.4 L19.0 79.1 L18.6 80.4 L17.8 81.3 L16.8 81.8 L15.4 82.0 L13.8 81.7 L5.4 79.7 L3.8 79.2 L2.4 78.4 L1.4 77.4 L0.6 76.1 L0.2 74.6 L0.0 72.8 Z M77.8 19.9 L77.9 19.2 L78.1 18.6 L78.4 18.2 L78.8 18.0 L79.4 17.9 L80.1 18.0 L118.7 27.2 L119.4 27.4 L120.0 27.8 L120.4 28.2 L120.7 28.8 L120.9 29.4 L121.0 30.2 L121.0 37.2 L120.9 37.9 L120.7 38.4 L120.4 38.8 L120.0 39.1 L119.4 39.1 L118.7 39.0 L80.1 29.8 L79.4 29.6 L78.8 29.3 L78.4 28.8 L78.1 28.3 L77.9 27.6 L77.8 26.9 Z"/></svg>
       <span>NEXT<em>GEN</em></span>
     </a>
+    <div class="navwhen"><b>Sat, Jan 23, 2027</b><i></i>10 AM to 2:30 PM</div>
     <ul>
       <li class="hm"><a href="about.html">NextGen 2025</a></li>
       <li class="hs"><a href="speakers.html">Speakers</a></li>
@@ -534,7 +540,7 @@
 
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NextGen Conference, January 23, 2027, Los Angeles</h1>
 
-  <div class="hero-when"><b>Saturday, January 23, 2027</b><span>10:00 AM to 2:30 PM</span><span>Los Angeles, <span class="it">CA</span></span></div>
+  <div class="hero-when"><b>Sat, Jan 23, 2027</b><i></i>10 AM to 2:30 PM</div>
   <div class="hero-foot">
     <div class="hero-cta">
       <a class="pill cta" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen <span class="arr">&rarr;</span></a>
