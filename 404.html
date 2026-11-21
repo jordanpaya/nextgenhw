@@ -208,13 +208,12 @@
 
   .hero-foot {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 40;
-    display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 18px;
+    display: grid; grid-template-columns: 1fr; justify-items: center; align-items: end; gap: 24px;
   }
-  .hero-when { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 0; padding: 13px 26px; border-radius: 999px; background: rgba(255,255,255,0.72); border: 1px solid rgba(23,20,26,0.10);
-    box-shadow: 0 18px 40px -22px rgba(60,20,40,0.45); font-size: clamp(15px, 1.35vw, 20px); font-weight: 600; color: var(--ink); text-align: center; }
+  .hero-when { position: absolute; left: 0; right: 0; top: clamp(84px, 11.5vh, 118px); z-index: 40; text-align: center; font-size: clamp(14px, 1.2vw, 18px); font-weight: 600; letter-spacing: 0.01em; color: var(--ink); }
   .hero-when b { font-weight: 800; }
   .hero-when > span::before { content: '\00b7'; margin: 0 12px; opacity: 0.45; }
-  @media (max-width: 640px) { .hero-when { flex-direction: column; border-radius: 22px; padding: 12px 22px; font-size: 15px; } .hero-when > span::before { content: none; } .hero-when > span:last-child { display: none; }
+  @media (max-width: 640px) { .hero-when { top: 96px; font-size: 14.5px; line-height: 1.5; } .hero-when b { display: block; } .hero-when > span::before { content: none; } .hero-when > span:last-child { display: none; }
     padding: 0 clamp(20px, 3vw, 44px) clamp(20px, 4vh, 40px);
   }
   .hero-date .kick { font-size: 13px; font-weight: 600; letter-spacing: 0.28em; opacity: 0.9; }
@@ -535,8 +534,8 @@
 
   <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">NextGen Conference, January 23, 2027, Los Angeles</h1>
 
+  <div class="hero-when"><b>Saturday, January 23, 2027</b><span>10:00 AM to 2:30 PM</span><span>Los Angeles, <span class="it">CA</span></span></div>
   <div class="hero-foot">
-    <div class="hero-when"><b>Saturday, January 23, 2027</b><span>10:00 AM to 2:30 PM</span><span>Los Angeles, <span class="it">CA</span></span></div>
     <div class="hero-cta">
       <a class="pill cta" href="https://instagram.com/hwnextgen" target="_blank" rel="noopener">Follow @hwnextgen <span class="arr">&rarr;</span></a>
       <a class="pill ghost" href="speakers.html">Meet the speakers</a>
@@ -557,7 +556,6 @@
         <h2 class="h2">Kara Swisher</h2>
         <div class="krole">Tech journalist, podcaster and author</div>
         <p class="lead" style="margin-top:22px">Kara Swisher has spent decades interviewing and challenging some of the most powerful figures in technology. She hosts <em>On with Kara Swisher</em>, co-hosts <em>Pivot</em> with Scott Galloway and recently launched <em>High Stakes</em>, a new podcast with former Secretary of State Hillary Clinton. She wrote <em>Burn Book: A Tech Love Story</em>, an inside look at Silicon Valley&rsquo;s rise and its biggest personalities, and co-founded Recode and the All Things Digital conference.</p>
-        <div class="kfacts"><span>On with Kara Swisher</span><span>Pivot</span><span>Burn Book</span><span>Recode</span></div>
       </div>
     </div>
     <div class="keynote flip">
